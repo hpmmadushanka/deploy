@@ -1,0 +1,36 @@
+<hr/>
+<h3>Transparency Activities</h3>
+<hr/>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 10%">Country Name</th>
+            <th style="width: 5%">Country Code</th>
+            <th style="width: 10%">Main Category</th>
+            <th style="width: 10%">Trasparency Activity</th>
+            <th style="width: 15%">Financial support provided by</th>
+            <th style="width: 15%">Technical support provided by</th>
+            <th style="width: 15%">Project / Programm under which support provided</th>
+            <th style="width: 5%">Status</th>
+            <th style="width: 15%">Description/ References</th>
+            
+            
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr *ngFor="let x of activities">
+            <td>{{x.countryName}}</td>
+            <td>{{x.countryCode}}</td>
+            <td>{{x.mainCategory}}</td>
+            <td>{{x.activity}}</td>
+            <td>{{x.fsup}}</td>
+            <td>{{x.tsup}}</td>
+            <td>{{x.projectsup}}</td>
+            <td>{{x.status}}</td>
+            <td>{{x.desc}}</td>
+            
+        </tr>
+        
+    </tbody>
+</table>

@@ -1,0 +1,674 @@
+
+
+<div class="p-3 overlay">
+    <div class="container">
+        <div class="row">
+          <div class="col-sm-2 col-md-2 col-lg-1  ">
+            <img src="unep_dtu.jpeg" alt="">
+          </div>
+          <div class="col-sm-8 col-md-8 col-lg-10">
+            <h2 class="center">SOUTH ASIA and SOUTH EAST ASIA NETWORKS for</h2>
+            <h2 class="center">ENCHANCING CLIMATE TRANSPARENCY</h2>
+            <h5 class="center">Initial questionnaire on ongoing transparency activities</h5>
+
+          </div>
+          <div class="col-sm-2 col-md-2 col-lg-1">
+            <img src="global_support_programme.jpg" alt="">
+          </div>
+        </div>
+        
+        <!-- quesion 1 ============================================================================== -->
+        <hr/>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="region">1. Region ?</label>
+                  <ng-select [items]="regions"
+                              [virtualScroll]="true"
+                              bindLabel="value"
+                              bindValue="id"
+                              placeholder="Select region"
+                              (change)="onChangeRegion()"
+                              [(ngModel)]="region">
+                  </ng-select>
+                                
+    
+            </div>
+        </div>
+        <!-- question 2 ================================================================================== -->
+        <hr/>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="country">2. Country ?</label>
+                  
+                  <ng-select [items]="countries"
+                              [virtualScroll]="true"
+                              bindLabel="value"
+                              bindValue="id"
+                              placeholder="Select country"
+                            [disabled]="!selectRegion"
+                            [(ngModel)]="country">
+                  </ng-select>
+                  
+                    
+            </div>
+        </div>
+
+        
+        <!-- question 3 =========================================================================== -->
+        <hr/>
+        <form [formGroup]="tableQuestion3">
+            
+            <label for="question3">3. Please fill the following table on ongoing/planned transparency activities.</label>
+            <div class="card overlay">
+            <table class="table table-border" [ngClass]="{'table-dark': mode}">
+              <thead class="text-nowrap">
+                <th>Transparency Activity <span class="ui-column-resizer" dragableColumn> </span></th>
+                <th>Submission Number<span class="ui-column-resizer" dragableColumn> </span></th>
+                <th>Status<span class="ui-column-resizer" dragableColumn> </span></th>
+                <th>Financial Support provided by<span class="ui-column-resizer" dragableColumn> </span></th>
+                <th>Technical Support provided by</th>
+                <th></th>
+              </thead>
+              <tbody style="height: 150px;">
+                <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls1.controls ; let i=index">
+                  <tr *ngIf="true" [formGroupName]="i">
+                    <td>
+                        
+                         <ng-select [items]="nc_ndc_bur"
+                              [virtualScroll]="true"
+                              bindLabel="value"
+                              bindValue="id"
+                              placeholder="Choose an item"
+                            formControlName="activity">
+                        </ng-select>
+                         
+                        
+                    </td>
+                    <td>
+                      <mat-form-field>
+                        <input matInput type="text" formControlName="subNumber">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="status">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="fsup">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="tsup">
+                        </mat-form-field>
+                    </td>
+                    
+                    <td>
+                      <mat-icon class="delete" (click)="deleteRow(1, i)">delete_forever</mat-icon>
+                      <!-- <mat-icon class="done" (click)="doneRow(group)">done</mat-icon> -->
+                      
+                      
+                    </td>
+                  </tr>
+                  <!-- <tr *ngIf="!group.get('isEditable').value" >
+                    <td>
+                      {{(group.get('activity').value).value}}
+                    </td>
+                    <td>
+                      {{group.get('subNumber').value}}
+                    </td>
+                    <td>
+                        {{group.get('status').value}}
+                    </td>
+                    <td>
+                        {{group.get('fsup').value}}
+                    </td>
+                    <td>
+                      {{group.get('tsup').value}}
+                    </td>
+                    <td>
+                      <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
+                    </td>
+                  </tr> -->
+                </ng-container>
+              </tbody>
+            </table>
+            
+        </div>
+        <div class="action-container">
+          <button mat-raised-button type="submit" (click)="addRow(1)">Add row</button>
+          
+        </div>
+        </form>
+        <!-- <div class="output">
+          <p>Form Data:  {{tableQuestion3.value | json}}</p>
+            <p>Is Valid: {{tableQuestion3.valid}}</p>
+        </div> -->
+
+          <!-- question 4 ========================================================================================-->
+          <hr/>
+
+          <div class="form-row">
+            <div class="form-group col">
+                <label for="question4">4. Does country has a systematic institutional arrangement in place to conduct transparency activities ? </label>
+                    
+                     
+                      <ng-select [items]="whether"
+                              [virtualScroll]="true"
+                              bindLabel="value"
+                              bindValue="value"
+                              placeholder="Choose an item"
+                                [(ngModel)]="q4"
+                                (change)="questionFour()" >
+                        </ng-select>
+            </div>
+    
+        </div>
+        <div *ngIf="this.q41">
+            <form [formGroup]="institutionAvailabilityTable">
+            
+                <label for="question41">4.1 If yes, please explain..</label>
+                <div class="card overlay">
+                <table class="table table-border" [ngClass]="{'table-dark': mode}">
+                  <thead class="text-nowrap">
+                    <th>Ministry/ Institution <span class="ui-column-resizer" dragableColumn> </span></th>
+                    <th>Roles & Responsibilities<span class="ui-column-resizer" dragableColumn> </span></th>
+                    <th>Regarding<span class="ui-column-resizer" dragableColumn> </span></th>
+                    
+                    <th></th>
+                  </thead>
+                  <tbody style="height: 150px;">
+                    <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls2.controls ; let i=index">
+                      <tr *ngIf="true" [formGroupName]="i">
+                        <td>
+                            <mat-form-field>
+                                <input matInput type="text" formControlName="institution">
+                              </mat-form-field>
+                        </td>
+                        <td>
+                          <mat-form-field>
+                            <input matInput type="text" formControlName="rolesAndResponsibilities">
+                          </mat-form-field>
+                        </td>
+                        <td>
+                           
+                             <ng-select [items]="nc_ndc_bur"
+                             [virtualScroll]="true"
+                             bindLabel="value"
+                             bindValue="id"
+                             placeholder="Choose an item"
+                             (change)="getMinistry()"
+                                formControlName="regarding">
+                             </ng-select>
+                            
+                        </td>
+                        
+                        <td>
+                          <mat-icon class="delete" (click)="deleteRow(2, i)">delete_forever</mat-icon>
+                          <!-- <mat-icon class="done" (click)="doneRow(group)">done</mat-icon> -->
+                        </td>
+                      </tr>
+                      <!-- <tr *ngIf="!group.get('isEditable').value" >
+                        <td>
+                          {{group.get('instutution').value}}
+                        </td>
+                        <td>
+                          {{group.get('rolesAndResponsibilities').value}}
+                        </td>
+                        <td>
+                            {{group.get('regarding').value.value}}
+                        </td>
+                        
+                        <td>
+                          <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
+                        </td>
+                      </tr> -->
+                    </ng-container>
+                  </tbody>
+                </table>
+                
+            </div>
+            <div class="action-container">
+              <button mat-raised-button type="submit" (click)="addRow(2)">Add row</button>
+              
+            </div>
+            <!-- <div class="output">
+              <p>Form Data:  {{institutionAvailabilityTable.value | json}}</p>
+                <p>Is Valid: {{institutionAvailabilityTable.valid}}</p>
+            </div> -->
+              </form>
+
+              <div class="form-row">
+                <div class="form-group col">
+                    <label for="question42">4.2 Are these institutions legally bound to perform above mentioned roles and responsibilities ? </label>
+                        
+                        
+                          
+                        <ng-select [items]="whether"
+                              [virtualScroll]="true"
+                              bindLabel="value"
+                              bindValue="value"
+                              placeholder="Choose an item"
+                              (change)="questionFourTwo()"
+                              [(ngModel)]="q42">
+                        </ng-select>
+                </div>
+        
+             </div>
+             <div *ngIf="this.q42det">
+                <form [formGroup]="legallyBoundTable">
+                    <div class="card overlay">
+                    
+                    <table class="table table-border" [ngClass]="{'table-dark': mode}">
+                      <thead class="text-nowrap">
+                        <th>Ministry/ Institution <span class="ui-column-resizer" dragableColumn> </span></th>
+                        <th>Legally bound?<span class="ui-column-resizer" dragableColumn> </span></th>
+                        <th>Description<span class="ui-column-resizer" dragableColumn> </span></th>
+                        
+                        <th></th>
+                      </thead>
+                      <tbody style="height: 150px;">
+                        <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls3.controls ; let i=index">
+                          <tr *ngIf="true" [formGroupName]="i">
+                            <td>
+                              <ng-select [items]="touchedRows2"
+                                    [virtualScroll]="true"
+                                    bindLabel="institution"
+                                    bindValue="institution"
+                                    placeholder="Choose an item"
+                                    formControlName="ministry"> >
+                              </ng-select>
+                                
+                            </td>
+                            <td>
+                              
+                              <ng-select [items]="whether"
+                                    [virtualScroll]="true"
+                                    bindLabel="value"
+                                    bindValue="value"
+                                    placeholder="Choose an item"
+                                    formControlName="legallyBound" >
+                              </ng-select>
+                               
+                            </td>
+                            <td>
+                              <mat-form-field>
+                                <input matInput type="text" formControlName="description">
+                              </mat-form-field>
+                            </td>
+                            
+                            
+                            <td>
+                              <mat-icon class="delete" (click)="deleteRow(3, i)">delete_forever</mat-icon>
+                              <!-- <mat-icon class="done" (click)="doneRow(group)">done</mat-icon> -->
+                            </td>
+                          </tr>
+                          <!-- <tr *ngIf="!group.get('isEditable').value" >
+                            <td>
+                              {{group.get('ministry').value}}
+                            </td>
+                            <td>
+                              {{group.get('legallyBound').value.value}}
+                            </td>
+                            <td>
+                                {{group.get('description').value}}
+                            </td>
+                            
+                            <td>
+                              <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
+                            </td>
+                          </tr> -->
+                        </ng-container>
+                      </tbody>
+                    </table>
+                    
+                </div>
+                <div class="action-container">
+                  <button mat-raised-button type="submit" (click)="addRow(3)">Add row</button>
+                  
+                </div>
+                  </form>
+                  <!-- <div class="output">
+                    <p>Form Data:  {{legallyBoundTable.value | json}}</p>
+                      <p>Is Valid: {{legallyBoundTable.valid}}</p>
+                  </div> -->
+             </div>
+                  
+        </div>
+        <div *ngIf="this.q43show">
+          <form [formGroup]="legallyNotBoundTable">
+      
+              <label for="question43">4.1 If No, please explain the process followed to prepare..</label>
+              <div class="card overlay">
+              <table class="table table-border" [ngClass]="{'table-dark': mode}">
+                <thead class="text-nowrap">
+                  <th>  <span class="ui-column-resizer" dragableColumn> </span></th>
+                  <th>Process<span class="ui-column-resizer" dragableColumn> </span></th>
+                  
+                  
+                  <th></th>
+                </thead>
+                <tbody style="height: 150px;">
+                  <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls4.controls ; let i=index">
+                    <tr *ngIf="true" [formGroupName]="i">
+                      <td>
+                          
+                            <ng-select [items]="nc_ndc_bur"
+                                    [virtualScroll]="true"
+                                    bindLabel="value"
+                                    bindValue="id"
+                                    placeholder="Choose an item"
+                                    formControlName="reg">
+                              </ng-select>
+                            
+                      </td>
+                      <td>
+                        <mat-form-field>
+                          <input matInput type="text" formControlName="desc">
+                        </mat-form-field>
+                      </td>
+                      
+                      
+                      <td>
+                        <mat-icon class="delete" (click)="deleteRow(4, i)">delete_forever</mat-icon>
+                        <!-- <mat-icon class="done" (click)="doneRow(group)">done</mat-icon> -->
+                      </td>
+                    </tr>
+                    <!-- <tr *ngIf="!group.get('isEditable').value" >
+                      <td>
+                        {{group.get('reg').value.value}}
+                      </td>
+                      <td>
+                        {{group.get('desc').value}}
+                      </td>
+                      
+                      
+                      <td>
+                        <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
+                      </td>
+                    </tr> -->
+                  </ng-container>
+                </tbody>
+              </table>
+              
+          </div>
+          <div class="action-container">
+            <button mat-raised-button type="submit" (click)="addRow(4)">Add row</button>
+            
+          </div>
+            </form>
+            <!-- <div class="output">
+              <p>Form Data:  {{legallyNotBoundTable.value | json}}</p>
+                <p>Is Valid: {{legallyNotBoundTable.valid}}</p>
+            </div> -->
+       </div>
+
+
+        <!-- question 5 ====================================================================================-->
+        <hr/>
+        
+        <form [formGroup]="transparencyActivityTable">
+            
+            <label for="question5">5. What are the ongoing/proposed transparency activities in the country ?</label> 
+            <div class="card overlay">
+            <table class="table table-border" [ngClass]="{'table-dark': mode}">
+              <thead class="text-nowrap">
+                <th><span class="ui-column-resizer" dragableColumn>Main Category </span></th>
+                <th><span class="ui-column-resizer" dragableColumn>Transparency Activity </span></th>
+                <th><span class="ui-column-resizer" dragableColumn> Sector</span></th>
+                <th><span class="ui-column-resizer" dragableColumn> Financial support provided by</span></th>
+                <th><span class="ui-column-resizer" dragableColumn> Technical support provided by</span></th>
+                <th><span class="ui-column-resizer" dragableColumn> Project/ Program under which support provided by</span></th>
+                <th><span class="ui-column-resizer" dragableColumn> Status</span></th>
+                <th><span class="ui-column-resizer" dragableColumn> Description/ References</span></th>
+                
+                
+                
+                <th></th>
+              </thead>
+              <tbody style="height: 250px;">
+                <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls5.controls ; let i=index">
+                  <tr *ngIf="true" [formGroupName]="i">
+                    
+                    <td>
+                      <ng-select [items]="mainCategoryList"
+                                bindLabel="value"
+                                bindValue="value"
+                                [multiple]="true"
+                                placeholder="Choose an item"
+                                formControlName="mainCategory">
+                      </ng-select>
+                        <!-- <select formControlName="mainCategory" multiple>
+                            <option value="" disabled>Choose an item</option>
+                            <option value="Mitigation" >Mitigation</option>
+                            <option value="Adaption" >Adaption</option>
+                            <option value="Support" >Support</option>
+                         </select> -->
+                    </td>
+                    <td>
+                      <ng-select [items]="transparencyActivityList"
+                                bindLabel="value"
+                                bindValue="value"
+                                [multiple]="true"
+                                placeholder="Choose an item"
+                                formControlName="transparencyActivity">
+                      </ng-select>
+                        <!-- <select formControlName="transparencyActivity" multiple>
+                            <option value="" disabled>Choose an item</option>
+                            <option value="Emission" >Emission (GHG inventories)</option>
+                            <option value="Policy" >Policy/ project impacts</option>
+                            <option value="GHG projection" >GHG projection and scenarios</option>
+                            <option value="Vulnerability assesment" >Vulnerability assesment</option>
+                            <option value="Risk assesment" >Risk assesment</option>
+                            <option value="Adaption plans" >Adaption plans</option>
+                            <option value="Support provided" >Support provided</option>
+                            <option value="Support recieved" >Support recieved</option>   
+                         </select> -->
+                    </td>
+                    <td>
+                      <ng-select [items]="sectorList"
+                                bindLabel="value"
+                                bindValue="value"
+                                [multiple]="true"
+                                placeholder="Choose an item"
+                                formControlName="sector">
+                      </ng-select>
+                        <!-- <select formControlName="sector" multiple>
+                            <option value="" disabled>Choose an item</option>
+                            <option value="Energy generation" >Energy generation</option>
+                            <option value="Transport" >Transport</option>
+                            <option value="Agriculture" >Agriculture</option>
+                            <option value="Forestry" >Forestry</option>
+                            <option value="Industry" >Industry</option>
+                            <option value="Waste" >Waste</option>
+                            <option value="Others" >Others</option>
+                         </select>
+                          -->
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="financialSup">
+                          </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="technicalSup">
+                          </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="project">
+                          </mat-form-field>
+                    </td>
+                    <td>
+                        <!-- <select formControlName="statusOfProject">
+                            <option value="" disabled>Choose an item</option>
+                            <option value="Proposed" >Proposed</option>
+                            <option value="Ongoing" >Ongoing</option>
+                            
+                         </select> -->
+                         <ng-select [items]="statusList"
+                                bindLabel="value"
+                                bindValue="value"
+                                [multiple]="false"
+                                placeholder="Choose an item"
+                                formControlName="statusOfProject">
+                          </ng-select>
+                         
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="references">
+                          </mat-form-field>
+                    </td>
+                   
+                    
+                    
+                    <td>
+                      <mat-icon class="delete" (click)="deleteRow(5, i)">delete_forever</mat-icon>
+                      <!-- <mat-icon class="done" (click)="doneRow(group)">done</mat-icon> -->
+                    </td>
+                  </tr>
+                  <!-- <tr *ngIf="!group.get('isEditable').value" >
+                    <td>
+                      {{group.get('mainCategory').value.value}}
+                    </td>
+                    <td>
+                      {{group.get('transparencyActivity').value.value}}
+                    </td>
+                    <td>
+                      {{group.get('sector').value.value}}
+                    </td>
+                    <td>
+                      {{group.get('financialSup').value}}
+                    </td>
+                    <td>
+                      {{group.get('technicalSup').value}}
+                    </td>
+                    <td>
+                      {{group.get('project').value}}
+                    </td>
+                    <td>
+                      {{group.get('statusOfProject').value.value}}
+                    </td>
+                    <td>
+                      {{group.get('references').value}}
+                    </td>
+                    
+                    
+                    <td>
+                      <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
+                    </td>
+                  </tr> -->
+                </ng-container>
+              </tbody>
+            </table>
+            
+        </div>
+        <div class="action-container">
+          <button mat-raised-button type="submit" (click)="addRow(5)">Add row</button>
+          
+        </div>
+          </form>
+          <!-- <div class="output">
+            <p>Form Data:  {{transparencyActivityTable.value | json}}</p>
+              <p>Is Valid: {{transparencyActivityTable.valid}}</p>
+          </div> -->
+        
+
+        <!-- question 6 =============================================================================================================-->
+        <hr/>
+        <form [formGroup]="barriersAndGapTable">
+            
+            <label for="question6">6. What are the barriers and gaps in preparing ?</label> 
+            <div class="card overlay">
+            <table class="table table-border" [ngClass]="{'table-dark': mode}">
+              <thead class="text-nowrap">
+                <th><span class="ui-column-resizer" dragableColumn> </span></th>
+                <th>Barriers and gap<span class="ui-column-resizer" dragableColumn> </span></th>
+                
+                
+                <th></th>
+              </thead>
+              <tbody style="height: 150px;">
+                <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls6.controls ; let i=index">
+                  <tr *ngIf="true" [formGroupName]="i">
+                    
+                    <td>
+                        
+                          <ng-select [items]="barriersAndGapList"
+                              [virtualScroll]="true"
+                              bindLabel="value"
+                              bindValue="id"
+                              placeholder="Choose an item"
+                            formControlName="preparing">
+                          </ng-select>
+                                
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="gap">
+                          </mat-form-field>
+                    </td>
+                   
+                    
+                    
+                    <td>
+                      <mat-icon class="delete" (click)="deleteRow(6, i)">delete_forever</mat-icon>
+                      <!-- <mat-icon class="done" (click)="doneRow(group)">done</mat-icon> -->
+                    </td>
+                  </tr>
+                  <!-- <tr *ngIf="!group.get('isEditable').value" >
+                    <td>
+                      {{group.get('preparing').value.value}}
+                    </td>
+                    <td>
+                      {{group.get('gap').value}}
+                    </td>
+                    
+                    
+                    <td>
+                        <button mat-icon-button (click)="editRow(group)">
+                      <mat-icon class="edit" >edit</mat-icon></button>
+                    </td>
+                  </tr> -->
+                </ng-container>
+              </tbody>
+            </table>
+            
+        </div>
+        <div class="action-container">
+          <button mat-raised-button type="submit" (click)="addRow(6)">Add row</button>
+          
+        </div>
+          </form>
+          <!-- <div class="output">
+            <p>Form Data:  {{barriersAndGapTable.value | json}}</p>
+              <p>Is Valid: {{barriersAndGapTable.valid}}</p>
+          </div> -->
+
+        <!-- question 7 ==================================================================================-->
+        <hr/>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="question7">7. Type of assistance required from the transparency network to prepare NC, BUR and BTR of the country.</label>
+                <textarea class="form-row form-group col" [(ngModel)]="assistanceReq" rows="10" c></textarea>
+            </div>
+        </div>
+        <hr/>
+
+        
+          
+        
+
+        
+        <div class="questionary_save-button right" >
+          <button class="button-right" type="submit" (click)="checkSubmitAuthentication()" >
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Submit</button>
+          
+        </div>
+        
+  </div>    
+</div>

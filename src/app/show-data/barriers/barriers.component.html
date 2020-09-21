@@ -1,0 +1,25 @@
+<hr/>
+<h3>Barriers</h3>
+<hr/>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 20%">Country Name</th>
+            <th style="width: 20%">Country Code</th>
+            <th style="width: 30%">Barriers/Gaps for the NCs</th>
+            <th style="width: 30%">Barriers/ Gaps for the BURs</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let b of barriers">
+            <td>{{b.countryName}}</td>
+            <td>{{b.countryCode}}</td>
+            <td>{{b.barrierNC}}</td>
+            <td>{{b.barrierBUR}}</td>
+            
+        </tr>
+        
+        
+    </tbody>
+</table>

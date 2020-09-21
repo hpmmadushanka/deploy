@@ -1,0 +1,50 @@
+﻿<div class="p-4">
+    <div class="container">
+        
+        
+        
+        <div >
+            <div *ngIf="this.user.status=='admin'">
+                <hr/>
+                <ul>
+                    <p><a routerLink="/users">Manage Users</a></p>
+                </ul>
+                <hr/>
+                <ul>
+                    <p>
+                        <a routerLink="/show_data">View data</a>
+                    </p>
+                    <hr/>
+                    <ul>
+                        
+                        <p>
+                            <a routerLink="/show_data/nc_bur_ndc"><li>NC - BUR - NDC</li></a>
+                        </p>
+                        <hr/>
+                        <p>
+                            <a routerLink="/show_data/institution_availability"><li>Institution Availability</li></a>
+                        </p>
+                        <hr/>
+                        <p>
+                            <a routerLink="/show_data/transparency_activities"><li>Transparency Activities</li></a>
+                        </p>
+                        <hr/>
+                        <p>
+                            <a routerLink="/show_data/barriers"><li>Barriers</li></a>
+                        </p>
+                        <hr/>
+                        <p>
+                            <a routerLink="/show_data/support_required"><li>Support Required</li></a>
+                        </p>
+                        <hr/>
+                    </ul>
+    
+                </ul>
+                
+                
+                
+            </div>
+        </div>
+        
+    </div>
+</div>

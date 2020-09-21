@@ -1,0 +1,24 @@
+<hr/>
+<h3>Support Required</h3>
+<hr/>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 25%">Country Name</th>
+            <th style="width: 15%">Country Code</th>
+            <th style="width: 60%">Support Required</th>
+    
+            
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let x of sups">
+            <td>{{x.countryName}}</td>
+            <td>{{x.countryCode}}</td>
+            <td>{{x.supReq}}</td>
+            
+        </tr>
+        
+    </tbody>
+</table>

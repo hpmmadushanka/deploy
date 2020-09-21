@@ -1,0 +1,98 @@
+﻿
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" *ngIf="user">
+    <div class="container" *ngIf="this.user.status=='admin'">
+      <a class="navbar-brand" href="http://www.climatesi.com/">
+            ClimateSI
+          </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home
+                  
+                </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item nav-link" routerLink="/show_data/data" routerLinkActive="active">View Data</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item nav-link" (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="container" *ngIf="this.user.status=='normal'">
+        <a class="navbar-brand" href="http://www.climatesi.com/">
+              <!-- <img src="images/" alt=""> -->
+              ClimateSI
+            </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <!-- <li class="nav-item active">
+              <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home
+                    
+                  </a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-item nav-link" (click)="questionary()">Questionary</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-item nav-link" (click)="logout()">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>  
+    
+  </nav>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" *ngIf="!user">
+    <div class="container">
+      <a class="navbar-brand" href="http://www.climatesi.com/">
+            ClimateSI
+          </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-item nav-link" routerLink="/account/login" routerLinkActive="active">Log In</a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<!-- main app container -->
+<div class="app-container" [ngClass]="{ 'bg-light': user }">
+    <alert></alert>
+    <router-outlet></router-outlet>
+</div>
+
+<!-- credits -->
+<div class="footer">
+  <div>
+    <div class="container">
+      <div id="textbox">
+        <p class="alignleft"><a style="color: aliceblue;" href="http://www.climatesi.com/">Climate Smart Initiatives (Pvt) Ltd.</a></p>
+        <!-- <p class="aligncenter">+94 112 075 264</p> -->
+        <p class="alignright">info@climatesi.com / +94 112 075 264</p>
+      </div>
+  
+      
+    </div>
+  </div>
+    
+</div>
